@@ -27,6 +27,7 @@ public class MainMenuScreen implements Screen {
     Texture playButtonInactive;
 
     private Sound mainMenuTheme;
+    private Sound menuButtonHover;
 
     public MainMenuScreen(final PvZGame game) {
         this.game = game;
@@ -35,6 +36,7 @@ public class MainMenuScreen implements Screen {
         exitButtonInactive = new Texture(Path.EXIT_BUTTON_INACTIVE);
         playButtonActive = new Texture(Path.PLAY_BUTTON_ACTIVE);
         playButtonInactive = new Texture(Path.PLAY_BUTTON_INACTIVE);
+        menuButtonHover = Gdx.audio.newSound(Gdx.files.internal(Path.MENU_BUTTON_HOVER));
         mainMenuTheme = Gdx.audio.newSound(Gdx.files.internal(Path.MAIN_THEME_MUSIC));
         mainMenuTheme.play();
     }
@@ -55,7 +57,6 @@ public class MainMenuScreen implements Screen {
                 && PvZGame.HEIGHT - Gdx.input.getY() < PLAY_BUTTON_Y + PLAY_BUTTON_HEIGHT && PvZGame.HEIGHT - Gdx.input.getY() > PLAY_BUTTON_Y) {
             game.batch.draw(playButtonActive, playButtonX, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
-                System.out.println("PLAY");
                 this.dispose();
                 game.setScreen(new MainGameScreen(game));
             }
@@ -68,7 +69,6 @@ public class MainMenuScreen implements Screen {
                 && PvZGame.HEIGHT - Gdx.input.getY() < EXIT_BUTTON_Y + EXIT_BUTTON_HEIGHT && PvZGame.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_Y) {
             game.batch.draw(exitButtonActive, exitButtonX, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
-                System.out.println("EXIT");
                 Gdx.app.exit();
             }
         } else {
@@ -102,5 +102,10 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         mainMenuTheme.dispose();
+        backgroundTheme.dispose();
+        exitButtonActive.dispose();
+        exitButtonInactive.dispose();
+        playButtonActive.dispose();
+        playButtonInactive.dispose();
     }
 }

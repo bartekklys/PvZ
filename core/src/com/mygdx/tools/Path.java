@@ -17,7 +17,8 @@ public class Path {
 
     // music & sounds
 
-    public static final String MAIN_THEME_MUSIC = "core/assets/sounds/theme/main_menu_theme.mp3";
+    public static final String MAIN_THEME_MUSIC = "core/assets/sounds/menu/main_menu_theme.mp3";
     public static final String DAY_STAGE_MUSIC = "core/assets/sounds/theme/day_stage.mp3";
+    public static final String MENU_BUTTON_HOVER = "core/assets/sounds/menu/button_hover.ogg";
 
 }
