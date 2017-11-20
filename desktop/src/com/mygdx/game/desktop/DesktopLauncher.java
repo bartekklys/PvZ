@@ -6,13 +6,11 @@ import com.mygdx.game.PvZGame;
 
 public class DesktopLauncher {
 
-	public static final int WIDTH = 1200;
-	public static final int HEIGHT = 800;
-
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = WIDTH;
-		config.height = HEIGHT;
+		config.width = PvZGame.WIDTH;
+		config.height = PvZGame.HEIGHT;
+		config.foregroundFPS = 60;
 		config.resizable = false;
 		new LwjglApplication(new PvZGame(), config);
 	}
