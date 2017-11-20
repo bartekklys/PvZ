@@ -66,19 +66,20 @@ public class MainGameScreen implements Screen {
         plant.draw(game.batch);
         zombie.draw(game.batch);
 
-        if (zombie.x % 200 == 150) {
-            //zombie.playSound();
+        timeHelper += Gdx.graphics.getDeltaTime();
+
+        // sprawdzanie czy zombiak natrafił na rośline - jesli tak to niech ją zjada
+        if (zombie.intersects(plant)) {
+            //zombie.setMoving(false);
         }
 
-        /*if (timeHelper > 1) {
-            Bullet b = new Bullet(bulletTexture, plant);
-            b.draw(batch);;
+        // strzelanie
+        if (timeHelper > 1) {
+            Bullet bullet = new Bullet(plant.y);
+            bullet.height = 100;
+            bullet.width = 100;
+            bullets.add(bullet);
             timeHelper = 0;
-        }*/
-
-        for (Bullet b :
-                bullets) {
-
         }
 
         // update bullets
@@ -96,13 +97,13 @@ public class MainGameScreen implements Screen {
                 bullets) {
             b.render(game.batch);
         }
-        if (timeHelper > 1) {
-            Bullet bullet = new Bullet(plant.y);
-            bullet.height = 100;
-            bullet.width = 100;
-            bullets.add(bullet);
-            timeHelper = 0;
+
+        // ruch zombiaków
+        if (zombie.isMoving()) {
+            zombie.x -= 1;
         }
+
+
 
 
         game.batch.end();
