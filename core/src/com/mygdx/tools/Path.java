@@ -17,6 +17,6 @@ public class Path {
 
     // music & sounds
 
-    public static final String MAIN_THEME_MUSIC = "core/assets/sounds/theme/music.mp3";
+    public static final String MAIN_THEME_MUSIC = "core/assets/sounds/theme/main_menu_theme.mp3";
 
 }
