@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.tools.Path;
 
 import java.awt.*;
 
@@ -23,10 +24,10 @@ public class Bullet extends Rectangle {
         this.x = DEFAULT_X;
         this.y = y + 80;
         this.remove = false;
-        shot = Gdx.audio.newSound(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\sounds\\plant\\shot.ogg"));
+        shot = Gdx.audio.newSound(Gdx.files.internal(Path.BULLET_SHOT_SOUND));
         shot.play();
         if (bulletTexture == null) {
-            bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\bullet.png");
+            bulletTexture = new Texture(Path.BULLET_TEXTURE);
         }
     }
 

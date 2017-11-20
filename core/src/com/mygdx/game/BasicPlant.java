@@ -13,7 +13,7 @@ public class BasicPlant extends Rectangle implements com.mygdx.game.plants.Plant
     Texture texture;
     List<Bullet> bullets;
 
-    public BasicPlant(Texture texture, Texture bulletTexture, int row) {
+    public BasicPlant(Texture texture, int row) {
         this.texture = texture;
         this.bullets = new ArrayList<Bullet>();
         this.x = 20;

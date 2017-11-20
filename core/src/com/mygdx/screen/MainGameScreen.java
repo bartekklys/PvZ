@@ -20,10 +20,10 @@ public class MainGameScreen implements Screen {
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 800;
 
-    Texture gardenTexture;
-    Texture plantTexture, bulletTexture;
-    Texture zombieTexture;
-    Music dayStageMusic;
+    private Texture gardenTexture;
+    private Texture plantTexture;
+    private Texture zombieTexture;
+    private Music dayStageMusic;
 
     Zombie zombie;
     BasicPlant plant;
@@ -40,7 +40,6 @@ public class MainGameScreen implements Screen {
 
         gardenTexture = new Texture(Path.GARDEN_TEXTURE);
         plantTexture = new Texture(Path.PLANT_TEXTURE);
-        bulletTexture = new Texture(Path.BULLET_TEXTURE);
         zombieTexture = new Texture(Path.ZOMBIE_TEXTURE);
 
         dayStageMusic = Gdx.audio.newMusic(Gdx.files.internal(Path.DAY_STAGE_MUSIC));
@@ -50,7 +49,7 @@ public class MainGameScreen implements Screen {
         zombie.height = 128;
         zombie.width = 128;
 
-        plant = new BasicPlant(plantTexture, bulletTexture, 0);
+        plant = new BasicPlant(plantTexture, 0);
         plant.height = 128;
         plant.width = 90;
 
@@ -102,10 +101,6 @@ public class MainGameScreen implements Screen {
         if (zombie.isMoving()) {
             zombie.x -= 1;
         }
-
-
-
-
         game.batch.end();
         long stop = System.currentTimeMillis();
 //        System.out.println(stop-start);
