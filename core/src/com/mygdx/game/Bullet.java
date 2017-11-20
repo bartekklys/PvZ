@@ -37,9 +37,9 @@ public class Bullet extends Rectangle {
      */
     public void update() {
         x += SPEED;
-        if (x > Gdx.graphics.getWidth()) {
+        /*if (x > Gdx.graphics.getWidth()) {
             remove = true;
-        }
+        }*/
     }
 
     public void render(SpriteBatch batch) {

@@ -37,8 +37,8 @@ public class MainMenuScreen implements Screen {
         playButtonActive = new Texture(Path.PLAY_BUTTON_ACTIVE);
         playButtonInactive = new Texture(Path.PLAY_BUTTON_INACTIVE);
         menuButtonHover = Gdx.audio.newSound(Gdx.files.internal(Path.MENU_BUTTON_HOVER));
-        mainMenuTheme = Gdx.audio.newSound(Gdx.files.internal(Path.MAIN_THEME_MUSIC));
-        mainMenuTheme.play();
+//        mainMenuTheme = Gdx.audio.newSound(Gdx.files.internal(Path.MAIN_THEME_MUSIC));
+//        mainMenuTheme.play();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-        mainMenuTheme.dispose();
+//        mainMenuTheme.dispose();
         backgroundTheme.dispose();
         exitButtonActive.dispose();
         exitButtonInactive.dispose();

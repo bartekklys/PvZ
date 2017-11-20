@@ -1,6 +1,7 @@
 package com.mygdx.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -27,7 +28,6 @@ public class MainGameScreen implements Screen {
 
     Zombie zombie;
     BasicPlant plant;
-    Bullet bullet;
 
     List<Bullet> bullets;
 
@@ -42,8 +42,8 @@ public class MainGameScreen implements Screen {
         plantTexture = new Texture(Path.PLANT_TEXTURE);
         zombieTexture = new Texture(Path.ZOMBIE_TEXTURE);
 
-        dayStageMusic = Gdx.audio.newMusic(Gdx.files.internal(Path.DAY_STAGE_MUSIC));
-        dayStageMusic.play();
+//        dayStageMusic = Gdx.audio.newMusic(Gdx.files.internal(Path.DAY_STAGE_MUSIC));
+//        dayStageMusic.play();
 
         zombie = new Zombie(zombieTexture, 0);
         zombie.height = 128;
@@ -81,27 +81,47 @@ public class MainGameScreen implements Screen {
             timeHelper = 0;
         }
 
-        // update bullets
-        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
-        for (Bullet b :
-                bullets) {
-            b.update();
-            /*if (bullet.remove) {
-                bulletsToRemove.add(b);
-            }*/
-        }
-        bullets.removeAll(bulletsToRemove);
-
         for (Bullet b :
                 bullets) {
             b.render(game.batch);
         }
+
+        // update bullets
+        /*for (Bullet b :
+                bullets) {
+            b.update();
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                b.remove = true;
+            }
+*//*
+
+            if (b.remove) {
+                bullets.remove(b);
+            }
+
+            if (this.zombie.intersects(b)) {
+                System.out.println(":D");
+                b.remove = true;
+            }*//*
+        }*/
+
+//        System.out.println(bullets.size());
+
 
         // ruch zombiaków
         if (zombie.isMoving()) {
             zombie.x -= 1;
         }
         game.batch.end();
+
+        // sprawdzenie czy zombiak został trafiony
+        for (Bullet b :
+                bullets) {
+            if (b.intersects(zombie)) {
+//                b.remove = true;
+            }
+        }
+
         long stop = System.currentTimeMillis();
 //        System.out.println(stop-start);
     }
