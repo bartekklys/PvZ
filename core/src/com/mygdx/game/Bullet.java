@@ -9,13 +9,12 @@ import java.awt.*;
 
 public class Bullet extends Rectangle {
 
-    public static final int SPEED = 1;
+    public static final int SPEED = 2;
     public static final int DEFAULT_X = 100;
     public boolean remove;
     private Sound shot;
 
     Texture bulletTexture;
-    Plant plant;
 
     float x, y;
 
@@ -24,16 +23,16 @@ public class Bullet extends Rectangle {
         this.x = DEFAULT_X;
         this.y = y + 80;
         this.remove = false;
-        shot = Gdx.audio.newSound(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\shot.ogg"));
-
+        shot = Gdx.audio.newSound(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\sounds\\plant\\shot.ogg"));
+        shot.play();
         if (bulletTexture == null) {
-            bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\bullet.png");
+            bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\bullet.png");
         }
     }
 
     /**
      * Update pozycji i kasuje jesli wyjdzie poza ekran
-     * @param deltaTime
+     * @param
      */
     public void update() {
         x += SPEED;

@@ -20,7 +20,7 @@ public class PvZGame extends ApplicationAdapter {
     Music themeMusic;
 
     Zombie zombie;
-    Plant plant;
+    BasicPlant plant;
     Bullet bullet;
 
     List<Bullet> bullets;
@@ -35,21 +35,21 @@ public class PvZGame extends ApplicationAdapter {
 
         gameCamera = new OrthographicCamera(976, 814);
 
-        img = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\garden.jpg");
-        plantTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\plant.png");
-        bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\bullet.png");
-        zombieTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\zombie.png");
+        img = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\garden.jpg");
+        plantTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\plant.png");
+        bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\bullet.png");
+        zombieTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\zombie.png");
 
-        themeMusic = Gdx.audio.newMusic(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\music.mp3"));
-        themeMusic.play();
+        themeMusic = Gdx.audio.newMusic(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\sounds\\theme\\music.mp3"));
+        // themeMusic.play();
 
         zombie = new Zombie(zombieTexture, 0);
-        zombie.height = 158;
-        zombie.width = 158;
+        zombie.height = 128;
+        zombie.width = 128;
 
-        plant = new Plant(plantTexture, bulletTexture, 0);
-        plant.height = 158;
-        plant.width = 158;
+        plant = new BasicPlant(plantTexture, bulletTexture, 0);
+        plant.height = 128;
+        plant.width = 90;
 
         bullets = new ArrayList<Bullet>();
 
@@ -69,7 +69,7 @@ public class PvZGame extends ApplicationAdapter {
         zombie.draw(batch);
 
         if (zombie.x % 200 == 150) {
-            zombie.playSound();
+            //zombie.playSound();
         }
 
         /*if (timeHelper > 1) {
@@ -100,8 +100,9 @@ public class PvZGame extends ApplicationAdapter {
         }
         if (timeHelper > 1) {
             Bullet bullet = new Bullet(plant.y);
+            bullet.height = 100;
+            bullet.width = 100;
             bullets.add(bullet);
-            bullet.playSound();
             timeHelper = 0;
         }
 
@@ -111,18 +112,33 @@ public class PvZGame extends ApplicationAdapter {
     }
 
     private void update() {
+        long start = System.currentTimeMillis();
         gameCamera.update();
         batch.setProjectionMatrix(gameCamera.combined);
         gameCamera.position.set(976 / 2, 814 / 2, 0);
-        zombie.x -= 1;
-        if (bullet != null) {
-            bullet.x += 1;
+
+        // sprawdzanie czy zombiak natrafił na rośline - jesli tak to niech ją zjada
+        if (zombie.intersects(plant)) {
+            //zombie.setMoving(false);
         }
 
-
+        // ruch zombiaka
+        if (zombie.isMoving()) {
+            zombie.x -= 1;
+        }
 
         timeHelper += Gdx.graphics.getDeltaTime();
 
+        // sprawdzanie czy zombiak został trafiony - jeśli tak to usuń kulke i odejmij HP
+        /*for (Bullet b :
+                bullets) {
+            if (b.intersects(zombie)) {
+                System.out.println("DUPA");
+                b.remove = true;
+            }
+        }*/
+        long stop = System.currentTimeMillis();
+//        System.out.println(stop-start);
     }
 
     @Override
