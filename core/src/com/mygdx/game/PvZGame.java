@@ -1,20 +1,20 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.tools.Path;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PvZGame extends ApplicationAdapter {
-    SpriteBatch batch;
-    Texture img;
+public class PvZGame extends Game {
+    public SpriteBatch batch;
+    Texture gardenTexture;
     Texture plantTexture, bulletTexture;
     Texture zombieTexture;
     Music themeMusic;
@@ -35,12 +35,12 @@ public class PvZGame extends ApplicationAdapter {
 
         gameCamera = new OrthographicCamera(976, 814);
 
-        img = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\garden.jpg");
-        plantTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\plant.png");
-        bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\bullet.png");
-        zombieTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\images\\zombie.png");
+        gardenTexture = new Texture(Path.GARDEN_TEXTURE);
+        plantTexture = new Texture(Path.PLANT_TEXTURE);
+        bulletTexture = new Texture(Path.BULLET_TEXTURE);
+        zombieTexture = new Texture(Path.ZOMBIE_TEXTURE);
 
-        themeMusic = Gdx.audio.newMusic(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\sounds\\theme\\music.mp3"));
+        themeMusic = Gdx.audio.newMusic(Gdx.files.internal(Path.MAIN_THEME_MUSIC));
         // themeMusic.play();
 
         zombie = new Zombie(zombieTexture, 0);
@@ -59,11 +59,11 @@ public class PvZGame extends ApplicationAdapter {
     @Override
     public void render() {
         update();
-        batch.begin();
 
 //		Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.draw(img, 0, 0);
+        batch.begin();
+        batch.draw(gardenTexture, 0, 0);
 
         plant.draw(batch);
         zombie.draw(batch);
@@ -144,6 +144,6 @@ public class PvZGame extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
-        img.dispose();
+        gardenTexture.dispose();
     }
 }
