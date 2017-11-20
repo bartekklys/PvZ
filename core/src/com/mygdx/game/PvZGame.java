@@ -7,12 +7,17 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.menu.MainMenuScreen;
 import com.mygdx.tools.Path;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PvZGame extends Game {
+
+    public static final int WIDTH = 1200;
+    public static final int HEIGHT = 800;
+
     public SpriteBatch batch;
     Texture gardenTexture;
     Texture plantTexture, bulletTexture;
@@ -33,7 +38,9 @@ public class PvZGame extends Game {
     public void create() {
         batch = new SpriteBatch();
 
-        gameCamera = new OrthographicCamera(976, 814);
+        this.setScreen(new MainMenuScreen(this));
+
+        /*gameCamera = new OrthographicCamera(976, 814);
 
         gardenTexture = new Texture(Path.GARDEN_TEXTURE);
         plantTexture = new Texture(Path.PLANT_TEXTURE);
@@ -51,14 +58,15 @@ public class PvZGame extends Game {
         plant.height = 128;
         plant.width = 90;
 
-        bullets = new ArrayList<Bullet>();
+        bullets = new ArrayList<Bullet>();*/
 
 
     }
 
     @Override
     public void render() {
-        update();
+        super.render();
+        /*update();
 
 //		Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -72,7 +80,7 @@ public class PvZGame extends Game {
             //zombie.playSound();
         }
 
-        /*if (timeHelper > 1) {
+        *//*if (timeHelper > 1) {
             Bullet b = new Bullet(bulletTexture, plant);
             b.draw(batch);;
             timeHelper = 0;
@@ -81,16 +89,16 @@ public class PvZGame extends Game {
         for (Bullet b :
                 bullets) {
 
-        }*/
+        }*//*
 
         // update bullets
         List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
         for (Bullet b :
                 bullets) {
             b.update();
-            /*if (bullet.remove) {
+            *//*if (bullet.remove) {
                 bulletsToRemove.add(b);
-            }*/
+            }*//*
         }
         bullets.removeAll(bulletsToRemove);
 
@@ -107,7 +115,7 @@ public class PvZGame extends Game {
         }
 
 
-        batch.end();
+        batch.end();*/
 
     }
 
