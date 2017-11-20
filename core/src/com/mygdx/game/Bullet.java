@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Bullet extends Rectangle {
 
-    public static final int SPEED = 2;
+    public static final int SPEED = 5;
     public static final int DEFAULT_X = 100;
     public boolean remove;
     private Sound shot;

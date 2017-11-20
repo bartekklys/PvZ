@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.menu.MainMenuScreen;
+import com.mygdx.screen.MainMenuScreen;
 import com.mygdx.tools.Path;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class PvZGame extends Game {
 
         this.setScreen(new MainMenuScreen(this));
 
-        /*gameCamera = new OrthographicCamera(976, 814);
+        gameCamera = new OrthographicCamera(976, 814);
 
         gardenTexture = new Texture(Path.GARDEN_TEXTURE);
         plantTexture = new Texture(Path.PLANT_TEXTURE);
@@ -58,7 +58,7 @@ public class PvZGame extends Game {
         plant.height = 128;
         plant.width = 90;
 
-        bullets = new ArrayList<Bullet>();*/
+        bullets = new ArrayList<Bullet>();
 
 
     }
@@ -66,7 +66,7 @@ public class PvZGame extends Game {
     @Override
     public void render() {
         super.render();
-        /*update();
+        update();
 
 //		Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -80,7 +80,7 @@ public class PvZGame extends Game {
             //zombie.playSound();
         }
 
-        *//*if (timeHelper > 1) {
+        /*if (timeHelper > 1) {
             Bullet b = new Bullet(bulletTexture, plant);
             b.draw(batch);;
             timeHelper = 0;
@@ -89,16 +89,16 @@ public class PvZGame extends Game {
         for (Bullet b :
                 bullets) {
 
-        }*//*
+        }*/
 
         // update bullets
         List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
         for (Bullet b :
                 bullets) {
             b.update();
-            *//*if (bullet.remove) {
+            /*if (bullet.remove) {
                 bulletsToRemove.add(b);
-            }*//*
+            }*/
         }
         bullets.removeAll(bulletsToRemove);
 
@@ -115,7 +115,7 @@ public class PvZGame extends Game {
         }
 
 
-        batch.end();*/
+        batch.end();
 
     }
 
@@ -151,7 +151,7 @@ public class PvZGame extends Game {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        gardenTexture.dispose();
+//        batch.dispose();
+//        gardenTexture.dispose();
     }
 }
