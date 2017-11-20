@@ -55,6 +55,7 @@ public class MainMenuScreen implements Screen {
                 && PvZGame.HEIGHT - Gdx.input.getY() < PLAY_BUTTON_Y + PLAY_BUTTON_HEIGHT && PvZGame.HEIGHT - Gdx.input.getY() > PLAY_BUTTON_Y) {
             game.batch.draw(playButtonActive, playButtonX, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
+                System.out.println("PLAY");
                 this.dispose();
                 game.setScreen(new MainGameScreen(game));
             }
@@ -67,6 +68,7 @@ public class MainMenuScreen implements Screen {
                 && PvZGame.HEIGHT - Gdx.input.getY() < EXIT_BUTTON_Y + EXIT_BUTTON_HEIGHT && PvZGame.HEIGHT - Gdx.input.getY() > EXIT_BUTTON_Y) {
             game.batch.draw(exitButtonActive, exitButtonX, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
+                System.out.println("EXIT");
                 Gdx.app.exit();
             }
         } else {
