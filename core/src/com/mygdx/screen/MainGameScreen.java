@@ -20,7 +20,6 @@ public class MainGameScreen implements Screen {
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 800;
 
-    public SpriteBatch batch;
     Texture gardenTexture;
     Texture plantTexture, bulletTexture;
     Texture zombieTexture;
@@ -61,11 +60,11 @@ public class MainGameScreen implements Screen {
     private void update() {
         long start = System.currentTimeMillis();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(gardenTexture, 0, 0);
+        game.batch.begin();
+        game.batch.draw(gardenTexture, 0, 0);
 
-        plant.draw(batch);
-        zombie.draw(batch);
+        plant.draw(game.batch);
+        zombie.draw(game.batch);
 
         if (zombie.x % 200 == 150) {
             //zombie.playSound();
@@ -95,7 +94,7 @@ public class MainGameScreen implements Screen {
 
         for (Bullet b :
                 bullets) {
-            b.render(batch);
+            b.render(game.batch);
         }
         if (timeHelper > 1) {
             Bullet bullet = new Bullet(plant.y);
@@ -106,7 +105,7 @@ public class MainGameScreen implements Screen {
         }
 
 
-        batch.end();
+        game.batch.end();
         long stop = System.currentTimeMillis();
 //        System.out.println(stop-start);
     }
@@ -118,7 +117,7 @@ public class MainGameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
+        update();
     }
 
     @Override
