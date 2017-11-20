@@ -2,88 +2,132 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PvZGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	Texture plantTexture, bulletTexture;
-	Texture zombieTexture;
-	Music themeMusic;
+    SpriteBatch batch;
+    Texture img;
+    Texture plantTexture, bulletTexture;
+    Texture zombieTexture;
+    Music themeMusic;
 
-	Zombie zombie;
-	Plant plant;
+    Zombie zombie;
+    Plant plant;
+    Bullet bullet;
 
-	private float timeHelper;
+    List<Bullet> bullets;
 
-	private OrthographicCamera gameCamera;
-	
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
+    private float timeHelper;
 
-		gameCamera = new OrthographicCamera(976 , 814);
+    private OrthographicCamera gameCamera;
 
-		img = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\garden.png");
-		plantTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\plant.png");
-		bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\bullet.png");
-		zombieTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\zombie.png");
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
 
-		themeMusic = Gdx.audio.newMusic(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\music.mp3"));
-		themeMusic.play();
+        gameCamera = new OrthographicCamera(976, 814);
 
-		zombie = new Zombie(zombieTexture, 0);
-		zombie.height = 158;
-		zombie.width = 158;
+        img = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\garden.jpg");
+        plantTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\plant.png");
+        bulletTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\bullet.png");
+        zombieTexture = new Texture("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\zombie.png");
 
-		plant = new Plant(plantTexture, bulletTexture, 0);
-		plant.height = 158;
-		plant.width = 158;
-	}
+        themeMusic = Gdx.audio.newMusic(Gdx.files.internal("C:\\Users\\Bartosz_Klys\\IdeaProjects\\PvZ\\core\\assets\\music.mp3"));
+        themeMusic.play();
 
-	@Override
-	public void render () {
-		update();
-		batch.begin();
+        zombie = new Zombie(zombieTexture, 0);
+        zombie.height = 158;
+        zombie.width = 158;
+
+        plant = new Plant(plantTexture, bulletTexture, 0);
+        plant.height = 158;
+        plant.width = 158;
+
+        bullets = new ArrayList<Bullet>();
+
+
+    }
+
+    @Override
+    public void render() {
+        update();
+        batch.begin();
 
 //		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.draw(img, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.draw(img, 0, 0);
 
-		plant.draw(batch);
-		zombie.draw(batch);
+        plant.draw(batch);
+        zombie.draw(batch);
 
-		if (zombie.x % 200 == 150) {
-			zombie.playSound();
-		}
+        if (zombie.x % 200 == 150) {
+            zombie.playSound();
+        }
 
-		if (timeHelper > 1) {
-			plant.shot(batch);
-			timeHelper = 0;
-		}
+        /*if (timeHelper > 1) {
+            Bullet b = new Bullet(bulletTexture, plant);
+            b.draw(batch);;
+            timeHelper = 0;
+        }
 
-		batch.end();
-	}
+        for (Bullet b :
+                bullets) {
 
-	private void update() {
-		gameCamera.update();
-		batch.setProjectionMatrix(gameCamera.combined);
-		gameCamera.position.set(976 /2 , 814 /2, 0);
-		zombie.x -= 1;
+        }*/
 
-//		plant.x += 1;
+        // update bullets
+        List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+        for (Bullet b :
+                bullets) {
+            b.update();
+            /*if (bullet.remove) {
+                bulletsToRemove.add(b);
+            }*/
+        }
+        bullets.removeAll(bulletsToRemove);
 
-		timeHelper += Gdx.graphics.getDeltaTime();
+        for (Bullet b :
+                bullets) {
+            b.render(batch);
+        }
+        if (timeHelper > 1) {
+            Bullet bullet = new Bullet(plant.y);
+            bullets.add(bullet);
+            bullet.playSound();
+            timeHelper = 0;
+        }
 
-	}
 
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-	}
+        batch.end();
+
+    }
+
+    private void update() {
+        gameCamera.update();
+        batch.setProjectionMatrix(gameCamera.combined);
+        gameCamera.position.set(976 / 2, 814 / 2, 0);
+        zombie.x -= 1;
+        if (bullet != null) {
+            bullet.x += 1;
+        }
+
+
+
+        timeHelper += Gdx.graphics.getDeltaTime();
+
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        img.dispose();
+    }
 }
